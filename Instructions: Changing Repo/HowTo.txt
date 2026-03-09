@@ -1,0 +1,47 @@
+How to git push:
+(Only do step 1 once.)
+
+1. In your main golder (mine is in /Documents/Courses/511/Stages/) I cloned the repo using:
+    `git clone https://github.com/Haechan-Kimm/EOSC511-TheDeepThinkers.git`
+
+    1(a) You should see:
+        `Cloning into 'EOSC511-TheDeepThinkers'...`
+
+2. Make sure you are in the folder equivalent to my .../Stages/ and cd into 'EOSC511-TheDeepThinkers'
+    or essentially any folder you want to add/make edits to in the main repo
+
+3. If you have made a new document or want to add edits to previously committed documents, then
+    `git add ` # note that adding a period to the end of the code line tells git to add the current 
+    directory you're in without specifying which file to add. This is not ideal, so:
+
+    3(a) Use git add your/full/file/path/to/document so you don't add stuff by mistake that isn't ready to be added
+    3(b) Use git add -p to review your changes and pick and choose which patches you want to be added
+
+    * You should use neither git add * nor git add ., because you should be much more deliberate about what you're adding to git.
+
+4. To commit the file that you have staged in your local repo, prepare them to be pushed to a remote repository:
+    'git commit -m "Add existing file"' # change 'Add existing file' to an explicit report on what you are doing
+    i.e. git commit -m "adding copy of project proposal"
+
+    # To remove this commit and modify the file, use 'git reset --soft HEAD~1' and commit and add the file again.
+
+5. Before you push, make sure you are up-to-date in your repo to rebase:
+
+    5(a) `git config pull.rebase true` # allows you to easily change a series of commits, modifying the history of your repository.
+    5(b) `git pull` 
+    5(c) You should see: Successfully rebased and updated refs/heads/main.
+
+6. Make sure you are in the `EOSC511-TheDeepThinkers` folder in your local system:
+
+    6(a) `git push`
+    6(b) You should see: 
+            Enumerating objects: 5, done.
+                Counting objects: 100% (5/5), done.
+                Delta compression using up to 8 threads
+                Compressing objects: 100% (4/4), done.
+                Writing objects: 100% (4/4), 232.27 KiB | 23.23 MiB/s, done.
+                Total 4 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+                To https://github.com/Haechan-Kimm/EOSC511-TheDeepThinkers.git
+                b941555..cfe26ea  main -> main
+
+You're done! Will update this again if I come across more things to do lol
