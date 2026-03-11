@@ -16,17 +16,17 @@ GenAI and groups/teams: Group work is an important part of this course, however,
 
 ## GenAI Policies for UBC
 
-**GenAI Policies for UBC**: https://guides.library.ubc.ca/GenAI/cite
+**GenAI Policies for APA**: https://guides.library.ubc.ca/GenAI/cite
 
 APA suggests that you should cite specific chats when they are used to generate ideas, content and information. You should cite the tool generally for the following use cases:
 
-when editing or organizing your own writing. Be sure to disclose in the author note or method section that you used GenAI to help prepare the paper, and cite the tool you used;
+1, when editing or organizing your own writing. Be sure to disclose in the author note or method section that you used GenAI to help prepare the paper, and cite the tool you used;
 
-for translation, either for part of a source or of your own work into another language. You should disclose that you have used GenAI for this task and cite the tool generally;
+2, for translation, either for part of a source or of your own work into another language. You should disclose that you have used GenAI for this task and cite the tool generally;
 
-when creating code, tables, or figures;
+3, when creating code, tables, or figures;
 
-for methodology.
+4, for methodology.
 
 Please note that it's a best practice to document your prompts for reference. It's not necessary to cite each one, but you should keep them handy as sources of data. You can also put the full text of long responses in an appendix or online supplemental materials.
 
