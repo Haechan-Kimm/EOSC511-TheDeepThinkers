@@ -85,15 +85,15 @@ def adv_dif_2D(args):
     y = np.linspace(0,Ly,n_y) # length coordinate [m]
     t = np.linspace(0,T,n_time) # time coordinate [s]
 
-    # U-wind calculation
+    # U-current calculation
     u0 = 0.01                     # flow field [m/s]
     u = np.zeros((n_y))
+    
     ## constant current u
     u[:] = u0
     ## y-dependent current u 
     #for i in range(n_y): 
     #    u[i] = min(u0 * np.log(y[i] + 1), 3 * u0)
-    plt.plot(u)
     
     # Impose initial conditions
     c_vals = np.zeros((n_x,n_y,n_time))
