@@ -34,6 +34,50 @@ import matplotlib.cm as cmx
 import matplotlib.colorbar as colorbar
 import os,glob
 
+# checking CFL stability conditions for the forward euler scheme
+def check_CFL(u, D, dt, dx):
+    """
+    Compute the CFL and diffusion numbers and check stability.
+
+    Parameters
+    ----------
+    u : float
+        Flow speed [m/s]
+    D : float
+        Diffusion coefficient [m^2/s]
+    dt : float
+        Time step [s]
+    dx : float
+        Grid spacing [m]
+    """
+    # advective CFL number, essentiallyhow far advection moves per timestep relative to grid spacing
+    C = u * dt / dx
+
+    # the diffusion number, essentiallyhow strong diffusion acts per timestep relative to grid spacing
+    R = D * dt / dx**2
+
+    # grid spacing and timestep
+    print(f"dx = {dx:.6f} m, dt = {dt:.6f} s")
+
+    # Print advective CFL number and explain
+    print(f"Advective CFL number C = {C:.6f}  # C = u*dt/dx, should be <= 1 for stability")
+    # Print diffusion number and explain
+    print(f"Diffusive number R = {R:.6f}  # R = D*dt/dx^2, should be <= 0.5 for stability")
+
+    # is diffusion condition satisfied?
+    print(f"Condition 1: R <= 0.5 -> {R <= 0.5}  # True means diffusion is stable")
+    # combined advection-diffusion condition is satisfied
+    print(f"Condition 2: C^2 <= 2R -> {C**2 <= 2*R}  # True means advection + diffusion is stable")
+
+    # stability verdict, good for when we want a quick check if changes have been made
+    if R <= 0.5 and C**2 <= 2*R:
+        print("Scheme is stable for these parameters.")
+    else:
+        print("Scheme is not stable for these parameters.")
+
+    return C, R
+
+
 def init(x,n_grid):
     """Set the initial condition values."""
     b = x[len(x) // 2]
@@ -77,6 +121,12 @@ def adv_dif_1D(args):
     dt = T / (n_time-1)        # time step [s]
     c0 = 0.1                   # initial concentration [kg/L]
     D = 0.01                    # Diffusivity [m^2/s]
+
+    # -----------------------------
+    # Check CFL / stability before running
+    # -----------------------------
+    check_CFL(u, D, dt, dx)
+
     x = np.linspace(0,L,n_grid) # length coordinate [m]
     t = np.linspace(0,T,n_time) # time coordinate [s]
     # Impose initial conditions
