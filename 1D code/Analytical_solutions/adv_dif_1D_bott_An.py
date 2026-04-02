@@ -34,13 +34,22 @@ import matplotlib.cm as cmx
 import matplotlib.colorbar as colorbar
 import os,glob
 
-def init(x,n_grid,n_time,L,D,dt):
+def init_df(x,n_grid,n_time,L,D,dt):
     """Set the initial condition values."""
     c_vals = np.zeros((n_time+1,n_grid+4))
     #c_vals[0, 2:n_grid+2]= np.sin((np.pi*x)/(2*L))
     b = x[len(x) // 2]
     t_0 = dt
     c_vals[0, :] = (1/np.sqrt(4*np.pi*D*t_0))*np.exp(-((x-b)**2)/(4*D*t_0))
+    return c_vals
+
+def init_adv(x,n_grid,n_time,L,D,dt):
+    """Set the initial condition values."""
+    c_vals = np.zeros((n_time+1,n_grid+4))
+    b = x[len(x) // 2]
+    a = 1
+    s = 1
+    c_vals[0, :]= a*np.exp(-((x-b)**2)/2*(s**2))
     return c_vals
 
 def boundary_conditions(c_array, n_grid):
@@ -154,11 +163,11 @@ def adv_dif_1D(args):
     order = 4
     
     # Initialize the concentration array
-    c_vals_ad = init(x,n_grid,n_time,L,D,dt)
-    c_vals_df = init(x,n_grid,n_time,L,D,dt)
+    c_vals_ad = init_adv(x,n_grid,n_time,L,D,dt)
+    c_vals_df = init_df(x,n_grid,n_time,L,D,dt)
     
-    c_an_ad = init(x,n_grid,n_time,L,D,dt) # Analytical solution for advection
-    c_an_df = init(x,n_grid,n_time,L,D,dt) # Analytical solution for diffusion
+    c_an_ad = init_adv(x,n_grid,n_time,L,D,dt) # Analytical solution for advection
+    c_an_df = init_df(x,n_grid,n_time,L,D,dt) # Analytical solution for diffusion
     
     # Impose boundary conditions on initial concentration and set initial concentration as current time-step
     c_now_ad = c_vals_ad[0,:]
@@ -200,6 +209,10 @@ def analytical_adv(L,x,u,D,t):
     b = x[len(x) // 2]
     t_0 = 1
     c_ad = (1/np.sqrt(4*np.pi*D*t_0))*np.exp(-((x-u*t-b)**2)/(4*D*t_0))
+    b = x[len(x) // 2]
+    a = 1
+    s = 1
+    c_ad = a*np.exp(-((x-u*t-b)**2)/2*(s**2))
     return c_ad
 
 def analytical_diff(L,x,u,D,t):
