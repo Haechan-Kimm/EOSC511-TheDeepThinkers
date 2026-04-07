@@ -39,7 +39,7 @@ def init(x,y,n_x,n_y):
     c0 = np.zeros((n_x,n_y))
     return c0
 
-def boundary_conditions(c_array, n_x, n_y,dt):
+def boundary_conditions(c_array, n_x, n_y, dt, N_flux):
     """Set the boundary condition values."""
 
     c_array[0,:] = 0
@@ -47,7 +47,6 @@ def boundary_conditions(c_array, n_x, n_y,dt):
     c_array[:,n_y - 1] = 0
     c_array[:,0] = c_array[:,1]
 
-    N_flux = 0.01
     c_array[n_x//2,0] = c_array[n_x//2,0] + dt * N_flux
 
     return c_array
@@ -71,6 +70,8 @@ def adv_dif_2D(args):
     Lx = int(args[3])
     Ly = int(args[4])
     T = int(args[5])
+    U = int(args[6])
+    N_flux = float(args[7])
     
 #     Alternate implementation:
 #     n_time, n_grid = map(int, args)
@@ -85,37 +86,31 @@ def adv_dif_2D(args):
     y = np.linspace(0,Ly,n_y) # length coordinate [m]
     t = np.linspace(0,T,n_time) # time coordinate [s]
 
-    # U-wind calculation
-    u0 = 0.01                     # flow field [m/s]
+    # U-current calculation 
+    u0 = 0.01 # flow field [m/s]
     u = np.zeros((n_y))
-    ## constant current u
-    u[:] = u0
-    ## y-dependent current u 
-    #for i in range(n_y): 
-    #    u[i] = min(u0 * np.log(y[i] + 1), 3 * u0)
-
-    fig,axes=plt.subplots(1, 1, figsize=(6, 8))
-    axes.plot(u,y)
-    axes.set_ylabel('y Grid')
-    axes.set_xlabel('Current Velocity $u$/[m/s]')
-    axes.set_title('Current Distribution along Y-axis')
+    if U==0: # constant current u
+        u[:] = u0
+    elif U==1: # y-dependent current u 
+        for i in range(n_y): 
+            u[i] = min(u0 * np.log(y[i] + 1), 3 * u0)
+    else:
+        print("Error: U should be 0 or 1")
     
-    
-
     # Impose initial conditions
-    c_vals = np.zeros((n_x,n_y,n_time))
+    c_vals = np.zeros((n_time,n_x,n_y))
     c_old = init(x,y,n_x,n_y)
     # Impose boundary conditions
-    c_old = boundary_conditions(c_old,n_x,n_y,dt)
+    c_old = boundary_conditions(c_old,n_x,n_y,dt,N_flux)
     # Putting intial conditions into results array
-    c_vals[:,:,0] = c_old
+    c_vals[0,:,:] = c_old
     # Time step loop using forward euler scheme
     for ts in np.arange(1, n_time):
         # Advance the solution and apply the boundary conditions
         c_new=fw_euler(c_old, u, D, dt, dx, dy, n_x, n_y)
-        c_new=boundary_conditions(c_new,n_x,n_y,dt)
+        c_new=boundary_conditions(c_new,n_x,n_y,dt,N_flux)
         # Store the values in the results array
-        c_vals[:,:,ts] = c_new
+        c_vals[ts,:,:] = c_new
         c_old = c_new
     return c_vals
 
