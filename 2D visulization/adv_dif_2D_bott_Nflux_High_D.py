@@ -152,7 +152,7 @@ def adv_dif_2D(args):
     dt = T / (n_time-1)        # time step [s]
     c0 = 0.1                   # initial concentration [kg/L]
     # D = 0.01                   # Diffusivity [m^2/s]
-    D = 0.1
+    D = 0.02
     x = np.linspace(0,Lx,n_x) # length coordinate [m]
     y = np.linspace(0,Ly,n_y) # length coordinate [m]
     t = np.linspace(0,T,n_time) # time coordinate [s]
