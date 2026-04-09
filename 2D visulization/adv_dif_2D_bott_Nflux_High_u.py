@@ -160,7 +160,7 @@ def adv_dif_2D(args):
     
     # U-current calculation 
     # u0 = 0.01 # flow field [m/s]
-    u0 = 1
+    u0 = 0.1
     u = np.zeros((n_y))
     if U==0: # constant current u
         u[:] = u0
