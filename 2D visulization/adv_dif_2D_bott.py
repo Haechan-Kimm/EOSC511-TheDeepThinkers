@@ -39,7 +39,7 @@ def init(x,y,n_x,n_y,n_time):
     c_vals = np.zeros((n_time+1,n_x+4,n_y))
     x0 = x[n_x//2]
     y0 = y[0]
-    a = 1
+    a = 10
     s = 1
     
     for i in range(n_x):
