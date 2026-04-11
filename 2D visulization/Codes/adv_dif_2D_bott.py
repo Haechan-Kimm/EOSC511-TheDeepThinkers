@@ -44,7 +44,7 @@ def init(x,y,n_x,n_y,n_time):
     
     for i in range(n_x):
         for j in range(n_y):
-            c_vals[0,i+2,j] = a*np.exp(-((x[i]-x0)**2+(y[j]-y0)**2)/2*(s**2))
+            c_vals[0,i+2,j] = a*np.exp(-((x[i]-x0)**2+(y[j]-y0)**2)/(2*(s**2)))
 
     return c_vals
 
