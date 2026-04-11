@@ -63,3 +63,14 @@ Example:
 Parenthetical citation: (OpenAI, 2025)
 
 Narrative citation: OpenAI (2025)
+
+
+## Junqi's GenAI Documentation
+
+### Apr. 10
+
+**Caption polishing: Gemini was used to polish my texts for captions.**
+
+**Original caption**: Fig: Sensitivity experiments of baseline, high diffusivity coefficient and high flow velocity cases in 2D numerical advection-diffusion simulations. White arrows indicate the flow velocity, blue-yellow colors denote nitrate concentration and red contours represent the concentration of $10^{-4}$ g/L.
+
+**AI Reply**: Figure X. Spatiotemporal evolution of nitrate concentration in 2D advection-diffusion simulations. The three rows compare the baseline scenario (top), a high diffusion case (middle), and a high flow velocity case (bottom) across four time steps (t=99, 249, 499, and 999 s). The background color map represents the nitrate concentration [g/L] on a logarithmic scale, with the red contour delineating the $10^−4$ g/L threshold. White arrows indicate the direction and magnitude of the uniform background flow velocity.
