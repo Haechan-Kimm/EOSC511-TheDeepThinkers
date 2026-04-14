@@ -53,8 +53,8 @@ def boundary_conditions(c_array, n_x, n_y, dt, N_flux):
     
     c_array[:,n_y-1] = 0
 
+    c_array[(n_x+4)//2,1] = c_array[(n_x+4)//2,1] + dt * N_flux
     c_array[:,0] = c_array[:,1]
-    c_array[(n_x+4)//2,0] = c_array[(n_x+4)//2,0] + dt * N_flux
 
     return c_array
 
